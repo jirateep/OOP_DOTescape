@@ -18,7 +18,6 @@ class Player(Model):
             self.direction_up_down = -1
         else:
             self.direction_up_down = 0
-        print (self.direction_up_down)
 
     def update_direction_left_right(self,direction):
         if direction == arcade.key.RIGHT:

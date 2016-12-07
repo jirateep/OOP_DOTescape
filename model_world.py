@@ -2,6 +2,7 @@ import arcade
 import arcade.key
 from random import randint
 from model_player import Player
+from model_map import Map
 
 class World:
     def __init__(self, width, height):
@@ -9,6 +10,7 @@ class World:
         self.height = height
         self.score = 0
         self.player = Player(self, 100, 100)
+        self.map = Map()
 
     def animate(self, delta):
         self.player.animate(delta);
@@ -20,7 +22,6 @@ class World:
     def on_key_release(self, key, key_modifiers):
         self.update_player_up_down(key,"unpress")
         self.update_player_left_right(key,"unpress")
-        print("release");
 
     def update_player_up_down(self, key, press_status):
         if key == arcade.key.UP:
