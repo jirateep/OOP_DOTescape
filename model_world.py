@@ -9,7 +9,7 @@ class World:
         self.width = width
         self.height = height
         self.score = 0
-        self.player = Player(self, 100, 100)
+        self.player = Player(self, 450, 300)
         self.map = Map()
 
     def animate(self, delta):

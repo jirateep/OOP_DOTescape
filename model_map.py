@@ -1,4 +1,3 @@
-import pprint
 from random import randint
 
 class Map:
@@ -17,8 +16,6 @@ class Map:
 
     def generate_map(self):
         self.map = [[[0 for col in range(4)]for col in range(self.col)] for row in range(self.row)]
-        #self.map = [[[0]*4]*self.col]*self.row
-        #print(self.map)
         for i in range(0,self.row):
             for j in  range(0,self.col):
                 sequence = self.generate_seq()
@@ -42,7 +39,6 @@ class Map:
                 i += 1
             else:
                 continue
-        print(seq)
         return seq
 
     def generate_up_door(self, i, j):
@@ -90,7 +86,7 @@ class Map:
                 self.map[i][j][self.DOOR_RIGHT] = 1;
 
     def print_map(self):
-        print(self.map)
+        #print(self.map)
         for i in range(0, self.row):
             str = ' '
             for j in range(0, self.col):
@@ -120,9 +116,7 @@ class Map:
             print(str)
 
     def random_status(self):
-        i = randint(0, 1)
-        print(i)
-        if(i == 0):
+        if(randint(0, 1) == 0):
             return 1
         else:
             return -1

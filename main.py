@@ -1,6 +1,6 @@
 import arcade
 import arcade.key
-from model_default import ModelSprite
+from model_default import ModelSprite, Texture
 from model_world import World
 from model_player import Player
 
@@ -14,13 +14,16 @@ class DotEscapeGameWindow(arcade.Window):
         arcade.set_background_color(arcade.color.BLACK)
 
         self.world = World(width, height)
-
+        self.room_sprite = Texture('images/room.png',0,0)
+        self.doors = [Texture('images/door_up.png',375,575),Texture('images/door_down.png',375,0),Texture('images/door_left.png',0,225),Texture('images/door_right.png',875,225)]
         self.player_sprite = ModelSprite('images/player.png',model=self.world.player)
-        #self.gold_sprite = ModelSprite('images/gold.png',model=self.world.gold)
 
     def on_draw(self):
         arcade.start_render()
+        self.room_sprite.draw()
         self.player_sprite.draw()
+        for sprite in self.doors:
+            sprite.draw()
         #self.gold_sprite.draw()
         #arcade.draw_text(str(self.world.score), self.world.width - 30, self.world.height - 30, arcade.color.WHITE, 20)
 

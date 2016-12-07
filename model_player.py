@@ -2,14 +2,13 @@ import arcade
 from model_default import Model
 
 class Player(Model):
-    DIR_HORIZONTAL = 0
-    DIR_VERTICAL = 1
+    #roomPosition = 0
+    #roomPosition = 0
     direction_up_down = 0;
     direction_left_right = 0;
 
     def __init__(self, world, x, y):
         super().__init__(world,x,y,0)
-        self.direction = Player.DIR_VERTICAL
 
     def update_direction_up_down(self,direction):
         if direction == arcade.key.UP:

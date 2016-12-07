@@ -10,7 +10,6 @@ class Model:
 class ModelSprite(arcade.Sprite):
     def __init__(self, *args, **kwargs):
         self.model = kwargs.pop('model', None)
-
         super().__init__(*args, **kwargs)
 
     def sync_with_model(self):
@@ -21,3 +20,12 @@ class ModelSprite(arcade.Sprite):
     def draw(self):
         self.sync_with_model()
         super().draw()
+
+class Texture:
+    def __init__(self,filename, x, y):
+        self.img = arcade.Sprite(filename,1)
+        self.img.left = x
+        self.img.bottom = y
+
+    def draw(self):
+        self.img.draw()
