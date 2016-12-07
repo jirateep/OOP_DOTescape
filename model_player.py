@@ -1,9 +1,10 @@
 import arcade
 from model_default import Model
+from model_map import Map
 
 class Player(Model):
-    roomPositionX = 0
-    roomPositionY = 0
+    room_position_x = 0
+    room_position_y = 0
     direction_up_down = 0;
     direction_left_right = 0;
 
@@ -28,10 +29,21 @@ class Player(Model):
 
     def animate(self, delta):
         self.move()
-        #self.goToNextRoom()
+        self.goToNextRoom()
 
-    #def goToNextRoom(self):
-
+    def goToNextRoom(self):
+        if self.x == 45 and self.y <= 375 and self.y >= 225:
+            if self.world.map.map[self.room_position_x][self.room_position_y][Map.DOOR_LEFT] == 1:
+                self.room_position_y -= 1
+        if self.x == 855 and self.y <= 375 and self.y >= 225:
+            if self.world.map.map[self.room_position_x][self.room_position_y][Map.DOOR_RIGHT] == 1:
+                self.room_position_y += 1
+        if self.y == 555 and self.x <= 555 and self.x >= 375:
+            if self.world.map.map[self.room_position_x][self.room_position_y][Map.DOOR_UP] == 1:
+                self.room_position_x -= 1
+        if self.y == 45 and self.x <= 555 and self.x >= 375:
+            if self.world.map.map[self.room_position_x][self.room_position_y][Map.DOOR_DOWN] == 1:
+                self.room_position_x += 1
 
     def move(self):
         self.move_up_down()
