@@ -5,12 +5,14 @@ from model_player import Player
 from model_map import Map
 
 class World:
+
     def __init__(self, width, height):
         self.width = width
         self.height = height
         self.score = 0
         self.player = Player(self, 450, 300)
         self.map = Map()
+        self.end_this_level = False
 
     def animate(self, delta):
         self.player.animate(delta);

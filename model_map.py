@@ -6,13 +6,12 @@ class Map:
     DOOR_LEFT = 2
     DOOR_RIGHT = 3
 
-    row = 4
-    col = 4
-    num_of_key = 2
-    keys = []
-    keys_status = [True for i in range(num_of_key)]
-
     def __init__(self):
+        self.row = 3
+        self.col = 3
+        self.num_of_key = 2
+        self.keys = []
+        self.keys_status = [True for i in range(self.num_of_key)]
         self.generate_map()
         self.print_map()
         self.insertKey()
@@ -23,7 +22,7 @@ class Map:
             key_x = randint(0,self.row-1)
             key_y = randint(0,self.col-1)
             pos = [key_x,key_y]
-            if i == 0 or not(pos in self.keys):
+            if i == 0 or(not(pos in self.keys) and not (pos == [0,0])):
                 self.keys.append(pos)
             else:
                 i -= 1
@@ -35,7 +34,7 @@ class Map:
         while(check):
             self.gate_x = randint(0,self.row-1)
             self.gate_y = randint(0,self.col-1)
-            if not [self.gate_x, self.gate_y] in self.keys:
+            if not [self.gate_x, self.gate_y] in self.keys and not([self.gate_x, self.gate_y] == [0,0]):
                 check = False
         print(self.gate_x,self.gate_y)
 

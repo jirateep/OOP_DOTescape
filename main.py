@@ -23,7 +23,6 @@ class DotEscapeGameWindow(arcade.Window):
     def on_draw(self):
         arcade.start_render()
         self.room_sprite.draw()
-        self.player_sprite.draw()
         for i in range(len(self.doors_sprite)):
             if self.world.map.map[self.world.player.room_position_x][self.world.player.room_position_y][i] == 1:
                 self.doors_sprite[i].draw()
@@ -35,6 +34,10 @@ class DotEscapeGameWindow(arcade.Window):
             self.gate_sprite.draw();
         #self.gold_sprite.draw()
         #arcade.draw_text(str(self.world.score), self.world.width - 30, self.world.height - 30, arcade.color.WHITE, 20)
+        self.player_sprite.draw()
+        if self.world.end_this_level:
+            arcade.draw_text("END LV. 1", 450, 300, arcade.color.BLACK, 50)
+
 
     def animate(self, delta):
         self.world.animate(delta)
