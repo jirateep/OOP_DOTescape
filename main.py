@@ -1,6 +1,8 @@
 import arcade
 import arcade.key
-from models import World, Player, ModelSprite
+from model_default import ModelSprite
+from model_world import World
+from model_player import Player
 
 SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 600
@@ -28,6 +30,8 @@ class DotEscapeGameWindow(arcade.Window):
 
     def on_key_press(self, key, key_modifiers):
         self.world.on_key_press(key, key_modifiers)
+    def on_key_release(self, key, key_modifiers):
+        self.world.on_key_release(key, key_modifiers)
 
 if __name__ == '__main__':
     window = DotEscapeGameWindow(SCREEN_WIDTH, SCREEN_HEIGHT)
