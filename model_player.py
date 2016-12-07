@@ -28,13 +28,28 @@ class Player(Model):
 
     def animate(self, delta):
         self.move()
+        #self.goToNextRoom()
+
+    #def goToNextRoom(self):
+
 
     def move(self):
         self.move_up_down()
         self.move_left_right()
+        self.stay_in_range()
 
     def move_up_down(self):
         self.y += 5*self.direction_up_down
 
     def move_left_right(self):
         self.x += 5*self.direction_left_right
+
+    def stay_in_range(self):
+        if self.x < 45:
+            self.x = 45
+        if self.y < 45:
+            self.y = 45
+        if self.y > 555:
+            self.y = 555
+        if self.x > 855:
+            self.x = 855
