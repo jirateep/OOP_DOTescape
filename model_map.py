@@ -8,7 +8,6 @@ class Map:
 
     row = 7
     col = 7
-    map = 0
 
     def __init__(self):
         self.generate_map()

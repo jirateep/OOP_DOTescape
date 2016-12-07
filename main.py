@@ -22,8 +22,9 @@ class DotEscapeGameWindow(arcade.Window):
         arcade.start_render()
         self.room_sprite.draw()
         self.player_sprite.draw()
-        for sprite in self.doors:
-            sprite.draw()
+        for i in range(len(self.doors)):
+            if self.world.map.map[self.world.player.roomPositionX][self.world.player.roomPositionY][i] == 1:
+                self.doors[i].draw()
         #self.gold_sprite.draw()
         #arcade.draw_text(str(self.world.score), self.world.width - 30, self.world.height - 30, arcade.color.WHITE, 20)
 

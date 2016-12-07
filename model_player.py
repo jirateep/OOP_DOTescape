@@ -2,8 +2,8 @@ import arcade
 from model_default import Model
 
 class Player(Model):
-    #roomPosition = 0
-    #roomPosition = 0
+    roomPositionX = 0
+    roomPositionY = 0
     direction_up_down = 0;
     direction_left_right = 0;
 
