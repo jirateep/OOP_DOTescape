@@ -37,13 +37,16 @@ class DotEscapeGameWindow(arcade.Window):
         for i in range(len(self.world.now_enermy_sprite)):
             self.world.now_enermy_sprite[i].draw()
         if self.world.end_this_level:
-            arcade.draw_text("END LV. "+str(self.world.level), 450, 300, arcade.color.BLACK, 50)
+            arcade.draw_text("END LEVEL "+str(self.world.level), 300, 200, arcade.color.BLACK, 50)
+        if self.world.player.is_dead:
+            arcade.draw_text("YOU DEAD\nYOU REACH "+str(self.world.level - 1)+" LEVELS", 200, 300, arcade.color.BLACK, 50)
 
     def animate(self, delta):
-        self.world.animate(delta)
-        self.player_sprite.set_position(self.world.player.x, self.world.player.y)
-        for i in range(len(self.world.now_enermy_sprite)):            
-            self.world.now_enermy_sprite[i].set_position(self.world.now_enermy[i].x,self.world.now_enermy[i].y)
+        if not self.world.player.is_dead:
+            self.world.animate(delta)
+            self.player_sprite.set_position(self.world.player.x, self.world.player.y)
+            for i in range(len(self.world.now_enermy_sprite)):
+                self.world.now_enermy_sprite[i].set_position(self.world.now_enermy[i].x,self.world.now_enermy[i].y)
 
     def on_key_press(self, key, key_modifiers):
         self.world.on_key_press(key, key_modifiers)

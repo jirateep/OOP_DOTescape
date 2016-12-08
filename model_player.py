@@ -12,8 +12,10 @@ class Player(Model):
         self.direction_left_right = 0;
         self.key_collected = 0
         self.count_to_next_level = 0
-        self.max_count_to_next_level = 600
+        self.max_count_to_next_level = 200
         self.shield = False
+        self.shield_count = 100
+        self.is_dead =False
 
     def update_direction_up_down(self,direction):
         if direction == arcade.key.UP:
@@ -37,18 +39,30 @@ class Player(Model):
         self.collected_key()
         self.end_level()
         self.use_shield()
+        self.dead_or_not()
+
+    def dead_or_not(self):
+        for enermy in self.world.now_enermy:
+            if ((self.x - enermy.x)**2+(self.y - enermy.y)**2)**(1/2.0) <= 35:
+                self.is_dead = True
 
     def use_shield(self):
-        if self.shield:
+        if self.shield and shield_count > 0:
             distance = 100
             for i in range(len(self.world.now_enermy)):
                 diff_x = self.x - self.world.now_enermy[i].x
+                if diff_x == 0:
+                    diff_x = 1
                 direction_x = diff_x/abs(diff_x)
                 self.world.now_enermy[i].x -= direction_x * distance
                 diff_y = self.y - self.world.now_enermy[i].y
+                if diff_y == 0:
+                    diff_y = 1
                 direction_y = diff_y/abs(diff_y)
                 self.world.now_enermy[i].y -= direction_y * distance
+            self.shield_count -= 1
             self.shield = False
+            print (self.shield_count)
 
     def end_level(self):
         self.check_end_level()
@@ -64,9 +78,12 @@ class Player(Model):
 
     def check_end_level(self):
         if [self.room_position_x, self.room_position_y] == [self.world.map.gate_x, self.world.map.gate_y]:
-            if self.key_collected == self.world.map.num_of_key:
-                if ((self.x - 450)**2 + (self.y - 300)**2)**(1/2.0) < 50:
+            if ((self.x - 450)**2 + (self.y - 300)**2)**(1/2.0) < 50:
+                if self.key_collected == self.world.map.num_of_key:
                     self.world.end_this_level = True
+                #else:
+                #    self.world.show_required_end_task
+
 
 
     def collected_key(self):

@@ -14,7 +14,6 @@ class Enermy(Model):
             self.speed = 1
         else:
             self.speed = 2
-        self.isDead = False
 
     def animate(self, delta):
         self.move()

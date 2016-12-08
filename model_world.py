@@ -22,6 +22,7 @@ class World:
         for i in range(len(self.now_enermy)):
             self.now_enermy[i].animate(delta)
 
+
     def on_key_press(self, key, key_modifiers):
         self.update_player_up_down(key,"press")
         self.update_player_left_right(key,"press")
