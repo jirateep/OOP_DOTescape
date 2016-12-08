@@ -47,7 +47,7 @@ class Player(Model):
                 self.is_dead = True
 
     def use_shield(self):
-        if self.shield and shield_count > 0:
+        if self.shield and self.shield_count > 0:
             distance = 100
             for i in range(len(self.world.now_enermy)):
                 diff_x = self.x - self.world.now_enermy[i].x
@@ -62,7 +62,7 @@ class Player(Model):
                 self.world.now_enermy[i].y -= direction_y * distance
             self.shield_count -= 1
             self.shield = False
-            print (self.shield_count)
+            #print (self.shield_count)
 
     def end_level(self):
         self.check_end_level()
@@ -81,9 +81,12 @@ class Player(Model):
             if ((self.x - 450)**2 + (self.y - 300)**2)**(1/2.0) < 50:
                 if self.key_collected == self.world.map.num_of_key:
                     self.world.end_this_level = True
-                #else:
-                #    self.world.show_required_end_task
-
+                else:
+                    self.world.show_required_end_task = True
+            else:
+                self.world.show_required_end_task = False
+        else:
+            self.world.show_required_end_task = False
 
 
     def collected_key(self):

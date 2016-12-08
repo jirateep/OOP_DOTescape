@@ -16,12 +16,12 @@ class World:
         self.end_this_level = False
         self.level = 1
         self.load_enermy()
+        self.show_required_end_task = True
 
     def animate(self, delta):
         self.player.animate(delta)
         for i in range(len(self.now_enermy)):
             self.now_enermy[i].animate(delta)
-
 
     def on_key_press(self, key, key_modifiers):
         self.update_player_up_down(key,"press")
@@ -33,7 +33,7 @@ class World:
         self.update_player_left_right(key,"unpress")
 
     def update_shield(self, key):
-        if key == arcade.key.Z:
+        if key == arcade.key.SPACE:
             self.player.shield = True
 
     def update_player_up_down(self, key, press_status):
