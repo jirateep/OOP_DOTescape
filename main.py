@@ -29,19 +29,21 @@ class DotEscapeGameWindow(arcade.Window):
         for i in range(len(self.world.map.keys)):
             if [self.world.player.room_position_x,self.world.player.room_position_y] == self.world.map.keys[i]:
                 if self.world.map.keys_status[i]:
-                    self.key_sprite.draw();
+                    self.key_sprite.draw()
         if self.world.map.gate_x == self.world.player.room_position_x and self.world.map.gate_y == self.world.player.room_position_y:
-            self.gate_sprite.draw();
-        #self.gold_sprite.draw()
+            self.gate_sprite.draw()
         #arcade.draw_text(str(self.world.score), self.world.width - 30, self.world.height - 30, arcade.color.WHITE, 20)
         self.player_sprite.draw()
+        for i in range(len(self.world.now_enermy_sprite)):
+            self.world.now_enermy_sprite[i].draw()
         if self.world.end_this_level:
-            arcade.draw_text("END LV. 1", 450, 300, arcade.color.BLACK, 50)
-
+            arcade.draw_text("END LV. "+str(self.world.level), 450, 300, arcade.color.BLACK, 50)
 
     def animate(self, delta):
         self.world.animate(delta)
         self.player_sprite.set_position(self.world.player.x, self.world.player.y)
+        for i in range(len(self.world.now_enermy_sprite)):            
+            self.world.now_enermy_sprite[i].set_position(self.world.now_enermy[i].x,self.world.now_enermy[i].y)
 
     def on_key_press(self, key, key_modifiers):
         self.world.on_key_press(key, key_modifiers)

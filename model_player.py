@@ -68,18 +68,22 @@ class Player(Model):
             if self.world.map.map[self.room_position_x][self.room_position_y][Map.DOOR_LEFT] == 1:
                 self.room_position_y -= 1
                 self.x = 850
+                self.world.load_enermy()
         if self.x == 855 and self.y <= 375 and self.y >= 225:
             if self.world.map.map[self.room_position_x][self.room_position_y][Map.DOOR_RIGHT] == 1:
                 self.room_position_y += 1
                 self.x = 50
+                self.world.load_enermy()
         if self.y == 555 and self.x <= 525 and self.x >= 375:
             if self.world.map.map[self.room_position_x][self.room_position_y][Map.DOOR_UP] == 1:
                 self.room_position_x -= 1
                 self.y = 50
+                self.world.load_enermy()
         if self.y == 45 and self.x <= 525 and self.x >= 375:
             if self.world.map.map[self.room_position_x][self.room_position_y][Map.DOOR_DOWN] == 1:
                 self.room_position_x += 1
                 self.y = 550
+                self.world.load_enermy()
 
     def move(self):
         self.move_up_down()

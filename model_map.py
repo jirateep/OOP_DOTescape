@@ -6,10 +6,11 @@ class Map:
     DOOR_LEFT = 2
     DOOR_RIGHT = 3
 
-    def __init__(self):
+    def __init__(self,world):
         self.row = 3
         self.col = 3
         self.num_of_key = 2
+        self.world = world
         self.make_new_map()
 
     def make_new_map(self):
@@ -17,6 +18,20 @@ class Map:
         self.print_map()
         self.insert_key()
         self.insert_gate()
+        self.generate_enermy()
+
+
+    def generate_enermy(self):
+        self.enermy = [[0 for col in range(self.col)]for row in range(self.row)]
+        for i in range(self.row):
+            for j in range(self.col):
+                if not [i,j] in self.keys:
+                    if not [i,j] == [self.gate_x,self.gate_y]:
+                        if not [i,j] == [self.world.player.room_position_x,self.world.player.room_position_y]:
+                            blue_enermy = randint(1,5)
+                            green_enermy = randint(0,3)
+                            self.enermy[i][j] = [blue_enermy,green_enermy]
+        print(self.enermy)
 
     def insert_key(self):
         self.keys = []

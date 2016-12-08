@@ -3,7 +3,8 @@ import arcade.key
 from random import randint
 from model_player import Player
 from model_map import Map
-
+from model_enermy import Enermy
+from model_default import ModelSprite
 class World:
 
     def __init__(self, width, height):
@@ -11,12 +12,15 @@ class World:
         self.height = height
         self.score = 0
         self.player = Player(self, 450, 300)
-        self.map = Map()
+        self.map = Map(self)
         self.end_this_level = False
         self.level = 1
+        self.load_enermy()
 
     def animate(self, delta):
-        self.player.animate(delta);
+        self.player.animate(delta)
+        for i in range(len(self.now_enermy)):
+            self.now_enermy[i].animate(delta)
 
     def on_key_press(self, key, key_modifiers):
         self.update_player_up_down(key,"press")
@@ -59,3 +63,19 @@ class World:
             self.map.col += 1
         self.map.make_new_map()
         self.player.key_collected = 0
+
+    def load_enermy(self):
+        self.now_enermy = []
+        self.now_enermy_sprite = []
+        if self.map.enermy[self.player.room_position_x][self.player.room_position_y] != 0:
+            self.now_enermy = []
+            for i in range(self.map.enermy[self.player.room_position_x][self.player.room_position_y][Enermy.BLUE]):
+                self.now_enermy.append(Enermy(self,Enermy.BLUE))
+            for i in range(self.map.enermy[self.player.room_position_x][self.player.room_position_y][Enermy.GREEN]):
+                self.now_enermy.append(Enermy(self,Enermy.GREEN))
+            self.now_enermy_sprite = []
+            for i in range(len(self.now_enermy)):
+                if self.now_enermy[i].speed == 1:
+                    self.now_enermy_sprite.append(ModelSprite('images/blue_enermy.png',model=self.now_enermy[i]))
+                else:
+                    self.now_enermy_sprite.append(ModelSprite('images/green_enermy.png',model=self.now_enermy[i]))
