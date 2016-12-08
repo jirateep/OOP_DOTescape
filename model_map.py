@@ -28,8 +28,8 @@ class Map:
                 if not [i,j] in self.keys:
                     if not [i,j] == [self.gate_x,self.gate_y]:
                         if not [i,j] == [self.world.player.room_position_x,self.world.player.room_position_y]:
-                            blue_enermy = randint(1,5) + self.world.level
-                            green_enermy = randint(0,3) +  self.world.level
+                            blue_enermy = randint(0,self.world.level) + 1
+                            green_enermy = randint(0,self.world.level)
                             self.enermy[i][j] = [blue_enermy,green_enermy]
         print(self.enermy)
 

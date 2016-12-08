@@ -12,7 +12,7 @@ class Player(Model):
         self.direction_left_right = 0;
         self.key_collected = 0
         self.count_to_next_level = 0
-        self.max_count_to_next_level = 200
+        self.max_count_to_next_level = 5
         self.shield = False
         self.shield_count = 100
         self.is_dead =False
