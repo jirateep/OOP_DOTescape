@@ -36,15 +36,14 @@ class Map:
     def insert_key(self):
         self.keys = []
         self.keys_status = [True for i in range(self.num_of_key)]
-        for i in range(self.num_of_key):
+        i = 0
+        while i != self.num_of_key:
             key_x = randint(0,self.row-1)
             key_y = randint(0,self.col-1)
             pos = [key_x,key_y]
             if i == 0 or(not(pos in self.keys) and not (pos == [0,0])):
                 self.keys.append(pos)
-            else:
-                i -= 1
-                continue
+                i += 1
         print(self.keys)
 
     def insert_gate(self):

@@ -25,10 +25,15 @@ class World:
     def on_key_press(self, key, key_modifiers):
         self.update_player_up_down(key,"press")
         self.update_player_left_right(key,"press")
+        self.update_shield(key)
 
     def on_key_release(self, key, key_modifiers):
         self.update_player_up_down(key,"unpress")
         self.update_player_left_right(key,"unpress")
+
+    def update_shield(self, key):
+        if key == arcade.key.Z:
+            self.player.shield = True
 
     def update_player_up_down(self, key, press_status):
         if key == arcade.key.UP:
@@ -68,12 +73,10 @@ class World:
         self.now_enermy = []
         self.now_enermy_sprite = []
         if self.map.enermy[self.player.room_position_x][self.player.room_position_y] != 0:
-            self.now_enermy = []
             for i in range(self.map.enermy[self.player.room_position_x][self.player.room_position_y][Enermy.BLUE]):
                 self.now_enermy.append(Enermy(self,Enermy.BLUE))
             for i in range(self.map.enermy[self.player.room_position_x][self.player.room_position_y][Enermy.GREEN]):
                 self.now_enermy.append(Enermy(self,Enermy.GREEN))
-            self.now_enermy_sprite = []
             for i in range(len(self.now_enermy)):
                 if self.now_enermy[i].speed == 1:
                     self.now_enermy_sprite.append(ModelSprite('images/blue_enermy.png',model=self.now_enermy[i]))

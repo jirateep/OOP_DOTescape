@@ -13,6 +13,7 @@ class Player(Model):
         self.key_collected = 0
         self.count_to_next_level = 0
         self.max_count_to_next_level = 600
+        self.shield = False
 
     def update_direction_up_down(self,direction):
         if direction == arcade.key.UP:
@@ -35,6 +36,19 @@ class Player(Model):
         self.go_to_next_room()
         self.collected_key()
         self.end_level()
+        self.use_shield()
+
+    def use_shield(self):
+        if self.shield:
+            distance = 100
+            for i in range(len(self.world.now_enermy)):
+                diff_x = self.x - self.world.now_enermy[i].x
+                direction_x = diff_x/abs(diff_x)
+                self.world.now_enermy[i].x -= direction_x * distance
+                diff_y = self.y - self.world.now_enermy[i].y
+                direction_y = diff_y/abs(diff_y)
+                self.world.now_enermy[i].y -= direction_y * distance
+            self.shield = False
 
     def end_level(self):
         self.check_end_level()

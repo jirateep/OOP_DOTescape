@@ -13,10 +13,22 @@ class Enermy(Model):
         if green_or_blue == self.BLUE:
             self.speed = 1
         else:
-            self.speed = 3
+            self.speed = 2
+        self.isDead = False
 
     def animate(self, delta):
         self.move()
+        self.move_scope()
+
+    def move_scope(self):
+        if self.x < 45:
+            self.x = 45
+        if self.y < 45:
+            self.y = 45
+        if self.y > 555:
+            self.y = 555
+        if self.x > 855:
+            self.x = 855
 
     def move(self):
         if self.x > self.world.player.x:
