@@ -42,8 +42,22 @@ class DotEscapeGameWindow(arcade.Window):
             arcade.draw_text("YOU DEAD\nYOU REACH "+str(self.world.level - 1)+" LEVELS", 200, 300, arcade.color.BLACK, 50)
         if self.world.show_required_end_task:
             arcade.draw_text("NEED 2 KEYS TO OPEN", 150, 100, arcade.color.BLACK, 50)
+        self.left_status();
+
+    def left_status(self):
+        arcade.draw_text("LV.", 910, 570, arcade.color.WHITE, 25)
+        arcade.draw_text(str(self.world.level), 910, 520, arcade.color.WHITE, 35)
+        arcade.draw_text("ROW", 910, 470, arcade.color.WHITE, 25)
+        arcade.draw_text(str(self.world.map.row), 910, 420, arcade.color.WHITE, 35)
+        arcade.draw_text("COL", 910, 370, arcade.color.WHITE, 25)
+        arcade.draw_text(str(self.world.map.col), 910, 320, arcade.color.WHITE, 35)
+        arcade.draw_text("NOW ROW", 910, 300, arcade.color.WHITE, 12)
+        arcade.draw_text(str(self.world.player.room_position_x + 1), 910, 250, arcade.color.WHITE, 35)
+        arcade.draw_text("NOW COL", 910, 200, arcade.color.WHITE, 12)
+        arcade.draw_text(str(self.world.player.room_position_y + 1), 910, 150, arcade.color.WHITE, 35)
         arcade.draw_text("BOMB", 910, 100, arcade.color.WHITE, 25)
         arcade.draw_text(str(self.world.player.shield_count), 910, 50, arcade.color.WHITE, 35)
+
     def animate(self, delta):
         if not self.world.player.is_dead:
             self.world.animate(delta)

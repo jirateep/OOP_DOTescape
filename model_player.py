@@ -77,17 +77,13 @@ class Player(Model):
                 self.world.make_new_level()
 
     def check_end_level(self):
+        self.world.show_required_end_task = False
         if [self.room_position_x, self.room_position_y] == [self.world.map.gate_x, self.world.map.gate_y]:
             if ((self.x - 450)**2 + (self.y - 300)**2)**(1/2.0) < 50:
                 if self.key_collected == self.world.map.num_of_key:
                     self.world.end_this_level = True
                 else:
                     self.world.show_required_end_task = True
-            else:
-                self.world.show_required_end_task = False
-        else:
-            self.world.show_required_end_task = False
-
 
     def collected_key(self):
         for i in range(len(self.world.map.keys)):

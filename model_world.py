@@ -10,11 +10,10 @@ class World:
     def __init__(self, width, height):
         self.width = width
         self.height = height
-        self.score = 0
+        self.level = 1
         self.player = Player(self, 450, 300)
         self.map = Map(self)
         self.end_this_level = False
-        self.level = 1
         self.load_enermy()
         self.show_required_end_task = True
 
