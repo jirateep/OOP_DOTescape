@@ -13,6 +13,7 @@ class World:
         self.player = Player(self, 450, 300)
         self.map = Map()
         self.end_this_level = False
+        self.level = 1
 
     def animate(self, delta):
         self.player.animate(delta);
@@ -48,3 +49,13 @@ class World:
                 self.player.update_direction_left_right(arcade.key.RIGHT)
             if press_status == "unpress":
                 self.player.update_direction_left_right("STAY")
+
+    def make_new_level(self):
+        self.level += 1
+        self.end_this_level = False
+        if self.level % 2 == 0:
+            self.map.row += 1
+        else:
+            self.map.col += 1
+        self.map.make_new_map()
+        self.player.key_collected = 0

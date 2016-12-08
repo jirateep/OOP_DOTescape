@@ -10,14 +10,17 @@ class Map:
         self.row = 3
         self.col = 3
         self.num_of_key = 2
-        self.keys = []
-        self.keys_status = [True for i in range(self.num_of_key)]
+        self.make_new_map()
+
+    def make_new_map(self):
         self.generate_map()
         self.print_map()
-        self.insertKey()
-        self.insertGate()
+        self.insert_key()
+        self.insert_gate()
 
-    def insertKey(self):
+    def insert_key(self):
+        self.keys = []
+        self.keys_status = [True for i in range(self.num_of_key)]
         for i in range(self.num_of_key):
             key_x = randint(0,self.row-1)
             key_y = randint(0,self.col-1)
@@ -29,7 +32,7 @@ class Map:
                 continue
         print(self.keys)
 
-    def insertGate(self):
+    def insert_gate(self):
         check = True
         while(check):
             self.gate_x = randint(0,self.row-1)

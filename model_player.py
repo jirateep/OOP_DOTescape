@@ -11,6 +11,8 @@ class Player(Model):
         self.direction_up_down = 0;
         self.direction_left_right = 0;
         self.key_collected = 0
+        self.count_to_next_level = 0
+        self.max_count_to_next_level = 600
 
     def update_direction_up_down(self,direction):
         if direction == arcade.key.UP:
@@ -35,10 +37,23 @@ class Player(Model):
         self.end_level()
 
     def end_level(self):
+        self.check_end_level()
+        self.prepare_to_next_level()
+
+    def prepare_to_next_level(self):
+        if self.world.end_this_level:
+            if self.count_to_next_level < self.max_count_to_next_level:
+                self.count_to_next_level += 1
+            else:
+                self.count_to_next_level = 0
+                self.world.make_new_level()
+
+    def check_end_level(self):
         if [self.room_position_x, self.room_position_y] == [self.world.map.gate_x, self.world.map.gate_y]:
             if self.key_collected == self.world.map.num_of_key:
                 if ((self.x - 450)**2 + (self.y - 300)**2)**(1/2.0) < 50:
                     self.world.end_this_level = True
+
 
     def collected_key(self):
         for i in range(len(self.world.map.keys)):
