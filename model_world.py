@@ -40,7 +40,7 @@ class World:
 
     def update_pause_status(self, key):
         if key == arcade.key.P:
-            print("pause")
+            #print("pause")
             if not self.show_map_status:
                 if self.pause_status:
                     self.pause_status = False
@@ -49,14 +49,13 @@ class World:
 
     def update_show_map_status(self, key):
         if key == arcade.key.M:
-            print("show map")
-            if not self.pause_status:
-                if self.show_map_status:
-                    self.show_map_status = False
-                    self.pause_status = False
-                else:
-                    self.show_map_status = True
-                    self.pause_status = True
+            #print("show map")
+            if self.show_map_status:
+                self.show_map_status = False
+                self.pause_status = False
+            elif not self.pause_status:
+                self.show_map_status = True
+                self.pause_status = True
 
     def update_shield(self, key):
         if key == arcade.key.SPACE:

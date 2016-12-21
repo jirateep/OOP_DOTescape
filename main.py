@@ -19,7 +19,7 @@ class DotEscapeGameWindow(arcade.Window):
         self.player_sprite = ModelSprite('images/player.png',model=self.world.player)
         self.key_sprite = TextureCenter('images/key.png',self.room_sprite.img.center_x,self.room_sprite.img.center_y)
         self.gate_sprite = TextureCenter('images/gate.png',self.room_sprite.img.center_x,self.room_sprite.img.center_y)
-        self.show_map_sprite = Texture('images/map.png',self.room_sprite.img.center_x-10,self.room_sprite.img.center_y-10)
+        self.show_map_sprite = TextureCenter('images/map.png',self.room_sprite.img.center_x,self.room_sprite.img.center_y)
 
     def on_draw(self):
         arcade.start_render()
@@ -50,12 +50,29 @@ class DotEscapeGameWindow(arcade.Window):
         self.left_status()
 
     def show_map(self):
-        print("hi")
-        #for i in range(0, self.world.map.row):
-        #    for j in range(0, self.world.map.col):
+        center_x = self.room_sprite.img.center_x
+        center_y = self.room_sprite.img.center_y
+        col = self.world.map.col
+        row = self.world.map.row
+        for i in range(0, row):
+            for j in range(0, col):
+                self.show_map_sprite.img.center_x = self.cal_x_y_show_map(center_x,col,j)
+                self.show_map_sprite.img.center_y = self.cal_x_y_show_map(center_y,row,i)
+                self.show_map_sprite.draw()
 
-                #self.map_sprite.draw()
-
+    def cal_x_y_show_map(self,center,max,now):
+        width = 5
+        size = 50
+        width_size = width + size
+        mid = max / 2
+        range = now - mid
+        if max % 2 == 0:
+            if now < mid:
+                return center - width_size / 2 + (range + 1) * width_size
+            else:
+                return center + width_size / 2 + range * width_size
+        else:
+            return center + range * width_size
 
     def left_status(self):
         arcade.draw_text("LV.", 910, 570, arcade.color.WHITE, 25)
