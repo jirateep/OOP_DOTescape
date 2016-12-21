@@ -1,6 +1,6 @@
 import arcade
 import arcade.key
-from model_default import ModelSprite, Texture
+from model_default import ModelSprite, Texture, TextureCenter
 from model_world import World
 from model_player import Player
 
@@ -17,8 +17,9 @@ class DotEscapeGameWindow(arcade.Window):
         self.room_sprite = Texture('images/room.png',0,0)
         self.doors_sprite = [Texture('images/door_up.png',375,575),Texture('images/door_down.png',375,0),Texture('images/door_left.png',0,225),Texture('images/door_right.png',875,225)]
         self.player_sprite = ModelSprite('images/player.png',model=self.world.player)
-        self.key_sprite = Texture('images/key.png',self.room_sprite.img.center_x-10,self.room_sprite.img.center_y-10)
-        self.gate_sprite = Texture('images/gate.png',self.room_sprite.img.center_x-50,self.room_sprite.img.center_y-50)
+        self.key_sprite = TextureCenter('images/key.png',self.room_sprite.img.center_x,self.room_sprite.img.center_y)
+        self.gate_sprite = TextureCenter('images/gate.png',self.room_sprite.img.center_x,self.room_sprite.img.center_y)
+        self.show_map_sprite = Texture('images/map.png',self.room_sprite.img.center_x-10,self.room_sprite.img.center_y-10)
 
     def on_draw(self):
         arcade.start_render()
@@ -49,9 +50,13 @@ class DotEscapeGameWindow(arcade.Window):
         self.left_status()
 
     def show_map(self):
-        print("map")
+        print("hi")
+        #for i in range(0, self.world.map.row):
+        #    for j in range(0, self.world.map.col):
 
-        
+                #self.map_sprite.draw()
+
+
     def left_status(self):
         arcade.draw_text("LV.", 910, 570, arcade.color.WHITE, 25)
         arcade.draw_text(str(self.world.level), 910, 520, arcade.color.WHITE, 35)

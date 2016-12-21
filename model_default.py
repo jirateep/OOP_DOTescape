@@ -29,3 +29,12 @@ class Texture:
 
     def draw(self):
         self.img.draw()
+
+class TextureCenter:
+    def __init__(self,filename,x,y):
+        self.img = arcade.Sprite(filename,1)
+        self.img.center_x = x
+        self.img.center_y = y
+
+    def draw(self):
+        self.img.draw()
