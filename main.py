@@ -56,10 +56,27 @@ class DotEscapeGameWindow(arcade.Window):
         row = self.world.map.row
         for i in range(0, row):
             for j in range(0, col):
-                show_map_sprite = TextureCenter('images/map.png',self.cal_x_y_show_map(center_x,col,j),self.cal_x_y_show_map(center_y,row,i))
+                show_map_sprite = TextureCenter('images/' + self.set_img_show_map(i,j),self.cal_x_show_map(center_x,col,j),self.cal_y_show_map(center_y,row,i))
                 show_map_sprite.draw()
 
-    def cal_x_y_show_map(self,center,max,now):
+    def set_img_show_map(self,x,y):
+        if not self.world.map.visited[x][y]:
+            return 'room_hide.png'
+        elif [x,y] == [self.world.player.room_position_x,self.world.player.room_position_y]:
+            return 'room_me.png'
+        elif [x,y] == [self.world.map.gate_x,self.world.map.gate_y]:
+            return 'room_gate.png'
+        elif [x,y] in self.world.map.keys:
+            show_key = False
+            for i in range(0,len(self.world.map.keys)):
+                if [x,y] == self.world.map.keys[i]:
+                    if self.world.map.keys_status[i]:
+                        return 'room_key.png'
+            return 'room_free.png'
+        else:
+            return 'room_free.png'
+
+    def cal_x_show_map(self,center,max,now):
         width = 5
         size = 50
         width_size = width + size
@@ -73,17 +90,31 @@ class DotEscapeGameWindow(arcade.Window):
         else:
             return center + range * width_size
 
+    def cal_y_show_map(self,center,max,now):
+        width = 5
+        size = 50
+        width_size = width + size
+        mid = max / 2
+        range = now - mid
+        if max % 2 == 0:
+            if now < mid:
+                return center + width_size / 2 - (range + 1) * width_size
+            else:
+                return center - width_size / 2 - range * width_size
+        else:
+            return center - range * width_size
+
     def left_status(self):
         arcade.draw_text("LV.", 910, 570, arcade.color.WHITE, 25)
         arcade.draw_text(str(self.world.level), 910, 520, arcade.color.WHITE, 35)
-        arcade.draw_text("ROW", 910, 470, arcade.color.WHITE, 25)
-        arcade.draw_text(str(self.world.map.row), 910, 420, arcade.color.WHITE, 35)
-        arcade.draw_text("COL", 910, 370, arcade.color.WHITE, 25)
-        arcade.draw_text(str(self.world.map.col), 910, 320, arcade.color.WHITE, 35)
-        arcade.draw_text("NOW ROW", 910, 300, arcade.color.WHITE, 12)
-        arcade.draw_text(str(self.world.player.room_position_x + 1), 910, 250, arcade.color.WHITE, 35)
-        arcade.draw_text("NOW COL", 910, 200, arcade.color.WHITE, 12)
-        arcade.draw_text(str(self.world.player.room_position_y + 1), 910, 150, arcade.color.WHITE, 35)
+        #arcade.draw_text("ROW", 910, 470, arcade.color.WHITE, 25)
+        #arcade.draw_text(str(self.world.map.row), 910, 420, arcade.color.WHITE, 35)
+        #arcade.draw_text("COL", 910, 370, arcade.color.WHITE, 25)
+        #arcade.draw_text(str(self.world.map.col), 910, 320, arcade.color.WHITE, 35)
+        #arcade.draw_text("NOW ROW", 910, 300, arcade.color.WHITE, 12)
+        #arcade.draw_text(str(self.world.player.room_position_x + 1), 910, 250, arcade.color.WHITE, 35)
+        #arcade.draw_text("NOW COL", 910, 200, arcade.color.WHITE, 12)
+        #arcade.draw_text(str(self.world.player.room_position_y + 1), 910, 150, arcade.color.WHITE, 35)
         arcade.draw_text("BOMB", 910, 100, arcade.color.WHITE, 25)
         arcade.draw_text(str(self.world.player.shield_count), 910, 50, arcade.color.WHITE, 35)
 

@@ -40,7 +40,10 @@ class Player(Model):
         self.end_level()
         self.use_shield()
         self.dead_or_not()
+        self.visiting()
 
+    def visiting(self):
+        self.world.map.visited[self.room_position_x][self.room_position_y] = True
     def dead_or_not(self):
         for enermy in self.world.now_enermy:
             if ((self.x - enermy.x)**2+(self.y - enermy.y)**2)**(1/2.0) <= 35:

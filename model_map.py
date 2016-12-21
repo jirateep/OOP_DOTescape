@@ -19,6 +19,7 @@ class Map:
         self.insert_key()
         self.insert_gate()
         self.generate_enermy()
+        self.visited = [[False for col in range(self.col)]for row in range(self.row)]
 
 
     def generate_enermy(self):
@@ -37,11 +38,11 @@ class Map:
         self.keys = []
         self.keys_status = [True for i in range(self.num_of_key)]
         i = 0
-        while i != self.num_of_key:
+        while i < self.num_of_key:
             key_x = randint(0,self.row-1)
             key_y = randint(0,self.col-1)
             pos = [key_x,key_y]
-            if i == 0 or(not(pos in self.keys) and not (pos == [self.world.player.room_position_x,self.world.player.room_position_y])):
+            if not(pos in self.keys) and not (pos == [self.world.player.room_position_x,self.world.player.room_position_y]):
                 self.keys.append(pos)
                 i += 1
         print(self.keys)
