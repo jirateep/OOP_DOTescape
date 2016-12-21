@@ -41,7 +41,7 @@ class Map:
             key_x = randint(0,self.row-1)
             key_y = randint(0,self.col-1)
             pos = [key_x,key_y]
-            if i == 0 or(not(pos in self.keys) and not (pos == [0,0])):
+            if i == 0 or(not(pos in self.keys) and not (pos == [self.world.player.room_position_x,self.world.player.room_position_y])):
                 self.keys.append(pos)
                 i += 1
         print(self.keys)
@@ -51,7 +51,7 @@ class Map:
         while(check):
             self.gate_x = randint(0,self.row-1)
             self.gate_y = randint(0,self.col-1)
-            if not [self.gate_x, self.gate_y] in self.keys and not([self.gate_x, self.gate_y] == [0,0]):
+            if not [self.gate_x, self.gate_y] in self.keys and not([self.gate_x, self.gate_y] == [self.world.player.room_position_x,self.world.player.room_position_y]):
                 check = False
         print(self.gate_x,self.gate_y)
 
