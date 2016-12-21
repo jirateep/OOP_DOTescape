@@ -55,6 +55,45 @@ class DotEscapeGameWindow(arcade.Window):
             arcade.draw_text("NEED 2 KEYS TO OPEN", 150, 100, arcade.color.BLACK, 50)
 
     def show_map(self):
+        self.draw_track()
+        self.draw_room()
+
+    def draw_track(self):
+        center_x = self.room_sprite.img.center_x
+        center_y = self.room_sprite.img.center_y
+        col = self.world.map.col
+        row = self.world.map.row
+        for i in range(0, row):
+            for j in range(0, col):
+                if self.world.map.visited[i][j]:
+                    for k in range(0, 4):
+                        if self.world.map.map[i][j][k] == 1:
+                            show_track_sprite = TextureCenter('images/track.png',self.cal_x_show_track(center_x,col,j,k),self.cal_y_show_track(center_y,row,i,k))
+                            show_track_sprite.draw()
+
+    def cal_x_show_track(self,center,max,now,door):
+        x = self.cal_x_show_map(center,max,now)
+        size = 50
+        width = 5
+        size_width = size + width
+        if door == self.world.map.DOOR_LEFT:
+            x -= (size_width)/2
+        if door == self.world.map.DOOR_RIGHT:
+            x += (size_width)/2
+        return x
+
+    def cal_y_show_track(self,center,max,now,door):
+        y = self.cal_y_show_map(center,max,now)
+        size = 50
+        width = 5
+        size_width = size + width
+        if door == self.world.map.DOOR_DOWN:
+            y -= (size_width)/2
+        if door == self.world.map.DOOR_UP:
+            y += (size_width)/2
+        return y
+
+    def draw_room(self):
         center_x = self.room_sprite.img.center_x
         center_y = self.room_sprite.img.center_y
         col = self.world.map.col
