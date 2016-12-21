@@ -19,7 +19,7 @@ class DotEscapeGameWindow(arcade.Window):
         self.player_sprite = ModelSprite('images/player.png',model=self.world.player)
         self.key_sprite = TextureCenter('images/key.png',self.room_sprite.img.center_x,self.room_sprite.img.center_y)
         self.gate_sprite = TextureCenter('images/gate.png',self.room_sprite.img.center_x,self.room_sprite.img.center_y)
-        self.show_map_sprite = TextureCenter('images/map.png',self.room_sprite.img.center_x,self.room_sprite.img.center_y)
+        #self.show_map_sprite = TextureCenter('images/map.png',self.room_sprite.img.center_x,self.room_sprite.img.center_y)
 
     def on_draw(self):
         arcade.start_render()
@@ -56,9 +56,8 @@ class DotEscapeGameWindow(arcade.Window):
         row = self.world.map.row
         for i in range(0, row):
             for j in range(0, col):
-                self.show_map_sprite.img.center_x = self.cal_x_y_show_map(center_x,col,j)
-                self.show_map_sprite.img.center_y = self.cal_x_y_show_map(center_y,row,i)
-                self.show_map_sprite.draw()
+                show_map_sprite = TextureCenter('images/map.png',self.cal_x_y_show_map(center_x,col,j),self.cal_x_y_show_map(center_y,row,i))
+                show_map_sprite.draw()
 
     def cal_x_y_show_map(self,center,max,now):
         width = 5
