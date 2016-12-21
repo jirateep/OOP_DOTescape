@@ -33,7 +33,6 @@ class DotEscapeGameWindow(arcade.Window):
                     self.key_sprite.draw()
         if self.world.map.gate_x == self.world.player.room_position_x and self.world.map.gate_y == self.world.player.room_position_y:
             self.gate_sprite.draw()
-        #arcade.draw_text(str(self.world.score), self.world.width - 30, self.world.height - 30, arcade.color.WHITE, 20)
         self.player_sprite.draw()
         for i in range(len(self.world.now_enermy_sprite)):
             self.world.now_enermy_sprite[i].draw()
@@ -151,8 +150,8 @@ class DotEscapeGameWindow(arcade.Window):
     def left_status(self):
         arcade.draw_text("LV.", 910, 570, arcade.color.WHITE, 25)
         arcade.draw_text(str(self.world.level), 910, 520, arcade.color.WHITE, 35)
-        #arcade.draw_text("ROW", 910, 470, arcade.color.WHITE, 25)
-        #arcade.draw_text(str(self.world.map.row), 910, 420, arcade.color.WHITE, 35)
+        arcade.draw_text("KEYS", 910, 200, arcade.color.WHITE, 25)
+        arcade.draw_text(str(self.world.player.key_collected), 910, 150, arcade.color.WHITE, 35)
         #arcade.draw_text("COL", 910, 370, arcade.color.WHITE, 25)
         #arcade.draw_text(str(self.world.map.col), 910, 320, arcade.color.WHITE, 35)
         #arcade.draw_text("NOW ROW", 910, 300, arcade.color.WHITE, 12)
