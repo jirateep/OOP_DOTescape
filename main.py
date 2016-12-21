@@ -36,7 +36,7 @@ class DotEscapeGameWindow(arcade.Window):
         self.player_sprite.draw()
         for i in range(len(self.world.now_enermy_sprite)):
             self.world.now_enermy_sprite[i].draw()
-        if self.world.pause_status:
+        if self.world.pause_status and not self.world.show_map_status:
             arcade.draw_text("PAUSE", 300, 200, arcade.color.BLACK, 50)
         if self.world.end_this_level:
             arcade.draw_text("END LEVEL "+str(self.world.level), 300, 200, arcade.color.BLACK, 50)
@@ -44,8 +44,14 @@ class DotEscapeGameWindow(arcade.Window):
             arcade.draw_text("YOU DIED\nREACH "+str(self.world.level - 1)+" LEVELS", 200, 300, arcade.color.BLACK, 50)
         if self.world.show_required_end_task:
             arcade.draw_text("NEED 2 KEYS TO OPEN", 150, 100, arcade.color.BLACK, 50)
-        self.left_status();
+        if self.world.show_map_status:
+            self.show_map()
+        self.left_status()
 
+    def show_map(self):
+        print("map")
+
+        
     def left_status(self):
         arcade.draw_text("LV.", 910, 570, arcade.color.WHITE, 25)
         arcade.draw_text(str(self.world.level), 910, 520, arcade.color.WHITE, 35)

@@ -41,15 +41,16 @@ class World:
     def update_pause_status(self, key):
         if key == arcade.key.P:
             print("pause")
-            if self.pause_status:
-                self.pause_status = False
-            else:
-                self.pause_status = True
+            if not self.show_map_status:
+                if self.pause_status:
+                    self.pause_status = False
+                else:
+                    self.pause_status = True
 
     def update_show_map_status(self, key):
         if key == arcade.key.M:
             print("show map")
-            if not pause_status:
+            if not self.pause_status:
                 if self.show_map_status:
                     self.show_map_status = False
                     self.pause_status = False
