@@ -19,7 +19,7 @@ class DotEscapeGameWindow(arcade.Window):
         self.player_sprite = ModelSprite('images/player.png',model=self.world.player)
         self.key_sprite = TextureCenter('images/key.png',self.room_sprite.img.center_x,self.room_sprite.img.center_y)
         self.gate_sprite = TextureCenter('images/gate.png',self.room_sprite.img.center_x,self.room_sprite.img.center_y)
-        #self.show_map_sprite = TextureCenter('images/map.png',self.room_sprite.img.center_x,self.room_sprite.img.center_y)
+        self.pause_sprite = Texture('images/pauseBg.png',0,0)
 
     def on_draw(self):
         arcade.start_render()
@@ -37,17 +37,22 @@ class DotEscapeGameWindow(arcade.Window):
         self.player_sprite.draw()
         for i in range(len(self.world.now_enermy_sprite)):
             self.world.now_enermy_sprite[i].draw()
+        if self.world.pause_status:
+            self.pause_sprite.draw()
+        self.show_status()
+        if self.world.show_map_status:
+            self.show_map()
+        self.left_status()
+
+    def show_status(self):
         if self.world.pause_status and not self.world.show_map_status:
-            arcade.draw_text("PAUSE", 300, 200, arcade.color.BLACK, 50)
+            arcade.draw_text("PAUSE", 450, 300, arcade.color.WHITE, 70, width=200, align="center", anchor_x="center", anchor_y="center")
         if self.world.end_this_level:
             arcade.draw_text("END LEVEL "+str(self.world.level), 300, 200, arcade.color.BLACK, 50)
         if self.world.player.is_dead:
             arcade.draw_text("YOU DIED\nREACH "+str(self.world.level - 1)+" LEVELS", 200, 300, arcade.color.BLACK, 50)
         if self.world.show_required_end_task:
             arcade.draw_text("NEED 2 KEYS TO OPEN", 150, 100, arcade.color.BLACK, 50)
-        if self.world.show_map_status:
-            self.show_map()
-        self.left_status()
 
     def show_map(self):
         center_x = self.room_sprite.img.center_x
