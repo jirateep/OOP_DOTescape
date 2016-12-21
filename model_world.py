@@ -19,6 +19,7 @@ class World:
         self.room_width = 900
         self.room_height = 600
         self.pause_status = False
+        self.show_map_status = False
 
     def animate(self, delta):
         if not self.pause_status:
@@ -31,6 +32,7 @@ class World:
         self.update_player_left_right(key,"press")
         self.update_shield(key)
         self.update_pause_status(key)
+        self.update_show_map_status(key)
 
     def on_key_release(self, key, key_modifiers):
         self.update_player_up_down(key,"unpress")
@@ -43,6 +45,17 @@ class World:
                 self.pause_status = False
             else:
                 self.pause_status = True
+
+    def update_show_map_status(self, key):
+        if key == arcade.key.M:
+            print("show map")
+            if not pause_status:
+                if self.show_map_status:
+                    self.show_map_status = False
+                    self.pause_status = False
+                else:
+                    self.show_map_status = True
+                    self.pause_status = True
 
     def update_shield(self, key):
         if key == arcade.key.SPACE:
