@@ -15,7 +15,9 @@ class World:
         self.map = Map(self)
         self.end_this_level = False
         self.load_enermy()
-        self.show_required_end_task = True
+        self.show_required_end_task = False
+        self.room_width = 900
+        self.room_height = 600
 
     def animate(self, delta):
         self.player.animate(delta)
