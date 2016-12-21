@@ -39,7 +39,7 @@ class DotEscapeGameWindow(arcade.Window):
         if self.world.end_this_level:
             arcade.draw_text("END LEVEL "+str(self.world.level), 300, 200, arcade.color.BLACK, 50)
         if self.world.player.is_dead:
-            arcade.draw_text("YOU DEAD\nYOU REACH "+str(self.world.level - 1)+" LEVELS", 200, 300, arcade.color.BLACK, 50)
+            arcade.draw_text("YOU DIED\nREACH "+str(self.world.level - 1)+" LEVELS", 200, 300, arcade.color.BLACK, 50)
         if self.world.show_required_end_task:
             arcade.draw_text("NEED 2 KEYS TO OPEN", 150, 100, arcade.color.BLACK, 50)
         self.left_status();
