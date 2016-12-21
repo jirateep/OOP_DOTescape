@@ -15,7 +15,10 @@ class Player(Model):
         self.max_count_to_next_level = 5
         self.shield = False
         self.shield_count = 100
+        self.life = 5
         self.is_dead =False
+        self.max_count_to_die = 150
+        self.count_to_die = self.max_count_to_die
 
     def update_direction_up_down(self,direction):
         if direction == arcade.key.UP:
@@ -45,9 +48,15 @@ class Player(Model):
     def visiting(self):
         self.world.map.visited[self.room_position_x][self.room_position_y] = True
     def dead_or_not(self):
-        for enermy in self.world.now_enermy:
-            if ((self.x - enermy.x)**2+(self.y - enermy.y)**2)**(1/2.0) <= 35:
-                self.is_dead = True
+        if self.count_to_die >= self.max_count_to_die:
+            for enermy in self.world.now_enermy:
+                if ((self.x - enermy.x)**2+(self.y - enermy.y)**2)**(1/2.0) <= 35:
+                    self.life -= 1
+                    self.count_to_die = 0
+                    if(self.life <= 0):
+                        self.is_dead = True
+        else:
+            self.count_to_die += 1
 
     def use_shield(self):
         if self.shield and self.shield_count > 0:

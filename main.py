@@ -150,10 +150,12 @@ class DotEscapeGameWindow(arcade.Window):
     def left_status(self):
         arcade.draw_text("LV.", 910, 570, arcade.color.WHITE, 25)
         arcade.draw_text(str(self.world.level), 910, 520, arcade.color.WHITE, 35)
-        arcade.draw_text("KEYS", 910, 200, arcade.color.WHITE, 25)
-        arcade.draw_text(str(self.world.player.key_collected), 910, 150, arcade.color.WHITE, 35)
-        #arcade.draw_text("COL", 910, 370, arcade.color.WHITE, 25)
-        #arcade.draw_text(str(self.world.map.col), 910, 320, arcade.color.WHITE, 35)
+        arcade.draw_text("KEYS", 915, 165, arcade.color.WHITE, 25)
+        for i in range(0,self.world.player.key_collected):
+            show_map_sprite = Texture('images/key.png', 920 + 30 * i, 135)
+            show_map_sprite.draw()
+        arcade.draw_text("LIFE", 910, 300, arcade.color.WHITE, 25)
+        arcade.draw_text(str(self.world.player.life), 910, 250, arcade.color.WHITE, 35)
         #arcade.draw_text("NOW ROW", 910, 300, arcade.color.WHITE, 12)
         #arcade.draw_text(str(self.world.player.room_position_x + 1), 910, 250, arcade.color.WHITE, 35)
         #arcade.draw_text("NOW COL", 910, 200, arcade.color.WHITE, 12)
