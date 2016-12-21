@@ -7,8 +7,8 @@ class Map:
     DOOR_RIGHT = 3
 
     def __init__(self,world):
-        self.row = 3
-        self.col = 3
+        self.row = 2
+        self.col = 2
         self.num_of_key = 2
         self.world = world
         self.make_new_map()

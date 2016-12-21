@@ -36,6 +36,8 @@ class DotEscapeGameWindow(arcade.Window):
         self.player_sprite.draw()
         for i in range(len(self.world.now_enermy_sprite)):
             self.world.now_enermy_sprite[i].draw()
+        if self.world.pause_status:
+            arcade.draw_text("PAUSE", 300, 200, arcade.color.BLACK, 50)
         if self.world.end_this_level:
             arcade.draw_text("END LEVEL "+str(self.world.level), 300, 200, arcade.color.BLACK, 50)
         if self.world.player.is_dead:

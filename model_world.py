@@ -18,20 +18,31 @@ class World:
         self.show_required_end_task = False
         self.room_width = 900
         self.room_height = 600
+        self.pause_status = False
 
     def animate(self, delta):
-        self.player.animate(delta)
-        for i in range(len(self.now_enermy)):
-            self.now_enermy[i].animate(delta)
+        if not self.pause_status:
+            self.player.animate(delta)
+            for i in range(len(self.now_enermy)):
+                self.now_enermy[i].animate(delta)
 
     def on_key_press(self, key, key_modifiers):
         self.update_player_up_down(key,"press")
         self.update_player_left_right(key,"press")
         self.update_shield(key)
+        self.update_pause_status(key)
 
     def on_key_release(self, key, key_modifiers):
         self.update_player_up_down(key,"unpress")
         self.update_player_left_right(key,"unpress")
+
+    def update_pause_status(self, key):
+        if key == arcade.key.P:
+            print("pause")
+            if self.pause_status:
+                self.pause_status = False
+            else:
+                self.pause_status = True
 
     def update_shield(self, key):
         if key == arcade.key.SPACE:
