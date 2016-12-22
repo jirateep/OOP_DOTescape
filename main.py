@@ -28,12 +28,16 @@ class DotEscapeGameWindow(arcade.Window):
     def on_draw(self):
         arcade.start_render()
         self.draw_roomBg()
-        self.player_sprite.draw()
+        self.draw_player()
         self.draw_enermy()
         self.draw_pause()
         self.show_status()
         self.draw_show_map()
         self.left_status()
+
+    def draw_player(self):
+        if self.world.player.count_to_die % 20 in range(0,9):
+            self.player_sprite.draw()
 
     def draw_roomBg(self):
         self.room_sprite.draw()

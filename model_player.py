@@ -17,7 +17,7 @@ class Player(Model):
         self.shield_count = 100
         self.life = 5
         self.is_dead =False
-        self.max_count_to_die = 150
+        self.max_count_to_die = 80
         self.count_to_die = self.max_count_to_die
 
     def update_direction_up_down(self,direction):
