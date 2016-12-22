@@ -8,6 +8,10 @@ SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 600
 
 class DotEscapeGameWindow(arcade.Window):
+
+    SHOW_MAP_SIZE = 50
+    SHOW_MAP_WIDTH = 8
+
     def __init__(self, width, height):
         super().__init__(width, height)
 
@@ -23,25 +27,45 @@ class DotEscapeGameWindow(arcade.Window):
 
     def on_draw(self):
         arcade.start_render()
+        self.draw_roomBg()
+        self.player_sprite.draw()
+        self.draw_enermy()
+        self.draw_pause()
+        self.show_status()
+        self.draw_show_map()
+        self.left_status()
+
+    def draw_roomBg(self):
         self.room_sprite.draw()
+        self.draw_doors()
+        self.draw_keys()
+        self.draw_gate()
+
+    def draw_doors(self):
         for i in range(len(self.doors_sprite)):
             if self.world.map.map[self.world.player.room_position_x][self.world.player.room_position_y][i] == 1:
                 self.doors_sprite[i].draw()
+    def draw_keys(self):
         for i in range(len(self.world.map.keys)):
             if [self.world.player.room_position_x,self.world.player.room_position_y] == self.world.map.keys[i]:
                 if self.world.map.keys_status[i]:
                     self.key_sprite.draw()
+    def draw_gate(self):
         if self.world.map.gate_x == self.world.player.room_position_x and self.world.map.gate_y == self.world.player.room_position_y:
             self.gate_sprite.draw()
-        self.player_sprite.draw()
+
+    def draw_enermy(self):
         for i in range(len(self.world.now_enermy_sprite)):
             self.world.now_enermy_sprite[i].draw()
+
+    def draw_pause(self):
         if self.world.pause_status:
             self.pause_sprite.draw()
-        self.show_status()
+
+    def draw_show_map(self):
         if self.world.show_map_status:
+            print("hi")
             self.show_map()
-        self.left_status()
 
     def show_status(self):
         if self.world.pause_status and not self.world.show_map_status:
@@ -72,9 +96,7 @@ class DotEscapeGameWindow(arcade.Window):
 
     def cal_x_show_track(self,center,max,now,door):
         x = self.cal_x_show_map(center,max,now)
-        size = 50
-        width = 5
-        size_width = size + width
+        size_width = self.SHOW_MAP_SIZE + self.SHOW_MAP_WIDTH
         if door == self.world.map.DOOR_LEFT:
             x -= (size_width)/2
         if door == self.world.map.DOOR_RIGHT:
@@ -83,9 +105,7 @@ class DotEscapeGameWindow(arcade.Window):
 
     def cal_y_show_track(self,center,max,now,door):
         y = self.cal_y_show_map(center,max,now)
-        size = 50
-        width = 5
-        size_width = size + width
+        size_width = self.SHOW_MAP_SIZE + self.SHOW_MAP_WIDTH
         if door == self.world.map.DOOR_DOWN:
             y -= (size_width)/2
         if door == self.world.map.DOOR_UP:
@@ -120,9 +140,7 @@ class DotEscapeGameWindow(arcade.Window):
             return 'room_free.png'
 
     def cal_x_show_map(self,center,max,now):
-        width = 5
-        size = 50
-        width_size = width + size
+        width_size = self.SHOW_MAP_SIZE + self.SHOW_MAP_WIDTH
         mid = max / 2
         range = now - mid
         if max % 2 == 0:
@@ -134,9 +152,7 @@ class DotEscapeGameWindow(arcade.Window):
             return center + range * width_size
 
     def cal_y_show_map(self,center,max,now):
-        width = 5
-        size = 50
-        width_size = width + size
+        width_size = self.SHOW_MAP_SIZE + self.SHOW_MAP_WIDTH
         mid = max / 2
         range = now - mid
         if max % 2 == 0:
