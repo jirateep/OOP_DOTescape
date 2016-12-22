@@ -68,18 +68,17 @@ class DotEscapeGameWindow(arcade.Window):
 
     def draw_show_map(self):
         if self.world.show_map_status:
-            print("hi")
             self.show_map()
 
     def show_status(self):
         if self.world.pause_status and not self.world.show_map_status:
             arcade.draw_text("PAUSE", 450, 300, arcade.color.WHITE, 70, width=200, align="center", anchor_x="center", anchor_y="center")
         if self.world.end_this_level:
-            arcade.draw_text("END LEVEL "+str(self.world.level), 300, 200, arcade.color.BLACK, 50)
+            arcade.draw_text("END LEVEL "+str(self.world.level), 450, 150, arcade.color.BLACK, 50, width=500, align="center", anchor_x="center", anchor_y="center")
         if self.world.player.is_dead:
-            arcade.draw_text("YOU DIED\nREACH "+str(self.world.level - 1)+" LEVELS", 200, 300, arcade.color.BLACK, 50)
+            arcade.draw_text("YOU DIED\nREACH "+str(self.world.level - 1)+" LEVELS", 450, 300, arcade.color.BLACK, 50, width=1000, align="center", anchor_x="center", anchor_y="center")
         if self.world.show_required_end_task:
-            arcade.draw_text("NEED 2 KEYS TO OPEN", 150, 100, arcade.color.BLACK, 50)
+            arcade.draw_text("NEED 2 KEYS TO OPEN", 450, 150, arcade.color.BLACK, 50, width=1000, align="center", anchor_x="center", anchor_y="center")
 
     def show_map(self):
         self.draw_track()
@@ -168,29 +167,29 @@ class DotEscapeGameWindow(arcade.Window):
             return center - range * width_size
 
     def left_status(self):
-        arcade.draw_text("LV.", 910, 570, arcade.color.WHITE, 25)
-        arcade.draw_text(str(self.world.level), 910, 520, arcade.color.WHITE, 35)
-        arcade.draw_text("KEYS", 915, 165, arcade.color.WHITE, 25)
+        arcade.draw_text("LEVEL", 950, 570, arcade.color.WHITE, 25, width=200, align="center", anchor_x="center", anchor_y="center")
+        arcade.draw_text(str(self.world.level), 950, 520, arcade.color.WHITE, 35 , width=200, align="center", anchor_x="center", anchor_y="center")
+        arcade.draw_text("KEYS", 950, 160, arcade.color.WHITE, 25, width=200, align="center", anchor_x="center", anchor_y="center")
         self.draw_keys_status()
-        arcade.draw_text("LIFE", 950, 335, arcade.color.WHITE, 35, width=200, align="center", anchor_x="center", anchor_y="center")
+        arcade.draw_text("LIFE", 950, 315, arcade.color.WHITE, 35, width=200, align="center", anchor_x="center", anchor_y="center")
         self.draw_life_status()
         #arcade.draw_text(str(self.world.player.life), 950, 250, arcade.color.WHITE, 35, width=200, align="center", anchor_x="center", anchor_y="center")
         #arcade.draw_text("NOW ROW", 910, 300, arcade.color.WHITE, 12)
         #arcade.draw_text(str(self.world.player.room_position_x + 1), 910, 250, arcade.color.WHITE, 35)
         #arcade.draw_text("NOW COL", 910, 200, arcade.color.WHITE, 12)
         #arcade.draw_text(str(self.world.player.room_position_y + 1), 910, 150, arcade.color.WHITE, 35)
-        arcade.draw_text("BOMB", 910, 100, arcade.color.WHITE, 25)
-        arcade.draw_text(str(self.world.player.shield_count), 910, 50, arcade.color.WHITE, 35)
+        arcade.draw_text("BOMB", 950, 80, arcade.color.WHITE, 25, width=200, align="center", anchor_x="center", anchor_y="center")
+        arcade.draw_text(str(self.world.player.shield_count), 950, 50, arcade.color.WHITE, 35, width=200, align="center", anchor_x="center", anchor_y="center")
 
     def draw_keys_status(self):
         for i in range(0,self.world.player.key_collected):
-            show_map_sprite = Texture('images/key.png', 920 + 30 * i, 135)
+            show_map_sprite = Texture('images/key.png', 920 + 30 * i, 110)
             show_map_sprite.draw()
 
     def draw_life_status(self):
         for i in range(0,6):
             x = 913 + i % 2 * 40
-            y = 280 - int(i / 2) * 35
+            y = 260 - int(i / 2) * 35
             if i < self.world.player.life:
                 life_sprite = Texture('images/heart.png',x,y)
                 life_sprite.draw()

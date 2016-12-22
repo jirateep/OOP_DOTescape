@@ -15,7 +15,7 @@ class Player(Model):
         self.max_count_to_next_level = 5
         self.shield = False
         self.shield_count = 100
-        self.life = 5
+        self.life = 6
         self.is_dead =False
         self.max_count_to_die = 80
         self.count_to_die = self.max_count_to_die
