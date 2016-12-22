@@ -171,17 +171,32 @@ class DotEscapeGameWindow(arcade.Window):
         arcade.draw_text("LV.", 910, 570, arcade.color.WHITE, 25)
         arcade.draw_text(str(self.world.level), 910, 520, arcade.color.WHITE, 35)
         arcade.draw_text("KEYS", 915, 165, arcade.color.WHITE, 25)
-        for i in range(0,self.world.player.key_collected):
-            show_map_sprite = Texture('images/key.png', 920 + 30 * i, 135)
-            show_map_sprite.draw()
-        arcade.draw_text("LIFE", 910, 300, arcade.color.WHITE, 25)
-        arcade.draw_text(str(self.world.player.life), 910, 250, arcade.color.WHITE, 35)
+        self.draw_keys_status()
+        arcade.draw_text("LIFE", 950, 335, arcade.color.WHITE, 35, width=200, align="center", anchor_x="center", anchor_y="center")
+        self.draw_life_status()
+        #arcade.draw_text(str(self.world.player.life), 950, 250, arcade.color.WHITE, 35, width=200, align="center", anchor_x="center", anchor_y="center")
         #arcade.draw_text("NOW ROW", 910, 300, arcade.color.WHITE, 12)
         #arcade.draw_text(str(self.world.player.room_position_x + 1), 910, 250, arcade.color.WHITE, 35)
         #arcade.draw_text("NOW COL", 910, 200, arcade.color.WHITE, 12)
         #arcade.draw_text(str(self.world.player.room_position_y + 1), 910, 150, arcade.color.WHITE, 35)
         arcade.draw_text("BOMB", 910, 100, arcade.color.WHITE, 25)
         arcade.draw_text(str(self.world.player.shield_count), 910, 50, arcade.color.WHITE, 35)
+
+    def draw_keys_status(self):
+        for i in range(0,self.world.player.key_collected):
+            show_map_sprite = Texture('images/key.png', 920 + 30 * i, 135)
+            show_map_sprite.draw()
+
+    def draw_life_status(self):
+        for i in range(0,6):
+            x = 913 + i % 2 * 40
+            y = 280 - int(i / 2) * 35
+            if i < self.world.player.life:
+                life_sprite = Texture('images/heart.png',x,y)
+                life_sprite.draw()
+            else:
+                life_sprite = Texture('images/empty_heart.png',x,y)
+                life_sprite.draw()
 
     def animate(self, delta):
         if not self.world.player.is_dead:
