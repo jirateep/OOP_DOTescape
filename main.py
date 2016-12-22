@@ -71,12 +71,12 @@ class DotEscapeGameWindow(arcade.Window):
             self.show_map()
 
     def show_status(self):
-        if self.world.pause_status and not self.world.show_map_status:
+        if self.world.pause_status and not self.world.show_map_status and not self.world.player.is_dead:
             arcade.draw_text("PAUSE", 450, 300, arcade.color.WHITE, 70, width=200, align="center", anchor_x="center", anchor_y="center")
         if self.world.end_this_level:
             arcade.draw_text("END LEVEL "+str(self.world.level), 450, 150, arcade.color.BLACK, 50, width=500, align="center", anchor_x="center", anchor_y="center")
         if self.world.player.is_dead:
-            arcade.draw_text("YOU DIED\nREACH "+str(self.world.level - 1)+" LEVELS", 450, 300, arcade.color.BLACK, 50, width=1000, align="center", anchor_x="center", anchor_y="center")
+            arcade.draw_text("YOU DIED\nREACH "+str(self.world.level - 1)+" LEVELS", 450, 300, arcade.color.WHITE, 70, width=1000, align="center", anchor_x="center", anchor_y="center")
         if self.world.show_required_end_task:
             arcade.draw_text("NEED 2 KEYS TO OPEN", 450, 150, arcade.color.BLACK, 50, width=1000, align="center", anchor_x="center", anchor_y="center")
 

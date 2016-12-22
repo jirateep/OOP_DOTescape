@@ -51,10 +51,12 @@ class Player(Model):
         if self.count_to_die >= self.max_count_to_die:
             for enermy in self.world.now_enermy:
                 if ((self.x - enermy.x)**2+(self.y - enermy.y)**2)**(1/2.0) <= 35:
-                    self.life -= 1
-                    self.count_to_die = 0
-                    if(self.life <= 0):
-                        self.is_dead = True
+                    if self.count_to_die >= self.max_count_to_die:
+                        self.life -= 1
+                        self.count_to_die = 0
+                        if(self.life <= 0):
+                            self.is_dead = True
+                            self.world.pause_status = True
         else:
             self.count_to_die += 1
 
